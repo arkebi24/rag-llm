@@ -1,81 +1,100 @@
-# Turborepo starter
+# Full-Stack Turborepo Starter
 
-This is an official starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest
-```
+This is a full-stack starter template using Turborepo, with a NestJS backend and a React frontend, configured for deployment on Vercel.
 
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
 
-### Apps and Packages
+### Apps
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `backend`: a [NestJS](https://nestjs.com/) app
+- `frontend`: a [React](https://reactjs.org/) app built with [Vite](https://vitejs.dev/)
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Packages
 
-### Utilities
+- `@repo/eslint-config`: ESLint configurations
+- `@repo/typescript-config`: TypeScript configurations
 
-This Turborepo has some additional tools already setup for you:
+## Frontend Technologies
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+The frontend app uses the following technologies:
+
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Aceternity UI](https://ui.aceternity.com/)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm (v7 or later)
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+### Development
+
+To develop all apps and packages, run the following command:
+
+```
+npm run dev
+```
+
+This will start the development servers for both the frontend and backend.
+
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
 
 ### Build
 
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
-pnpm build
+npm run build
 ```
 
-### Develop
+### Deployment
 
-To develop all apps and packages, run the following command:
+This project is configured for deployment on Vercel. The `vercel.json` file in the root directory specifies the build and deployment settings.
 
-```
-cd my-turborepo
-pnpm dev
-```
+To deploy:
 
-### Remote Caching
+1. Install the Vercel CLI:
+   ```
+   npm install -g vercel
+   ```
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+2. Login to Vercel:
+   ```
+   vercel login
+   ```
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
+3. Deploy the project:
+   ```
+   vercel
+   ```
 
 ## Useful Links
 
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- [Turborepo Documentation](https://turbo.build/repo/docs)
+- [NestJS Documentation](https://docs.nestjs.com/)
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [Vite Documentation](https://vitejs.dev/guide/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Shadcn UI Documentation](https://ui.shadcn.com/)
+- [Aceternity UI Documentation](https://ui.aceternity.com/docs)
+- [Vercel Documentation](https://vercel.com/docs)
