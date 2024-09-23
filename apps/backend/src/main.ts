@@ -11,7 +11,9 @@ async function bootstrap() {
       const allowedOrigins = [
         'http://localhost:8080',
         'http://localhost:5173',
+        'https://rag-llm-frontend.vercel.app/',
         process.env.FRONTEND_URL,
+
       ];
       if (allowedOrigins.includes(origin) || !origin) {
         callback(null, origin);
