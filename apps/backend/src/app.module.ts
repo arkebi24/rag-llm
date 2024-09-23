@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { RagLlmModule } from './rag-llm/rag-llm.module';
 
 @Module({
-  imports: [],
+  imports: [RagLlmModule],
   controllers: [AppController],
   providers: [AppService],
 })

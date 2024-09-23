@@ -1,13 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { NestApplicationOptions } from '@nestjs/common';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 async function bootstrap() {
-  const options: NestApplicationOptions = {
-    logger: ['error', 'warn', 'debug'],
-    cors: true,
-  };
-  const app = await NestFactory.create(AppModule, options);
+  const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.setGlobalPrefix('api');
   await app.listen(process.env.PORT || 3000);
 }
