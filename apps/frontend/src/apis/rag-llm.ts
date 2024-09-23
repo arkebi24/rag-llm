@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'https://your-backend-url.vercel.app/api/rag-llm';
+const API_URL = process.env.VITE_API_URL || 'http://localhost:3000/api/rag-llm';
 export const processRagLlm = async (message: string) => {
   try {
     const response = await axios.post(API_URL, {
