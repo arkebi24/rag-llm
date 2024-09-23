@@ -6,7 +6,21 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        'http://localhost:8080',
+        'http://localhost:5173',
+        process.env.FRONTEND_URL,
+      ];
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, origin);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  });
   app.setGlobalPrefix('api');
   await app.listen(process.env.PORT || 3000);
 }
