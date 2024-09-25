@@ -7,7 +7,8 @@ const steps = [
   {
     icon: IconSearch,
     title: "Input Query",
-    description: "Enter your search query in the input field.",
+    description:
+      "Enter your search query in the search bar. Ex: Latest news on AI",
   },
   {
     icon: IconBrain,
@@ -18,7 +19,8 @@ const steps = [
   {
     icon: IconList,
     title: "Results",
-    description: "View a list of relevant results and additional information.",
+    description:
+      "View a list of relevant results and similar information to your query.",
   },
 ];
 

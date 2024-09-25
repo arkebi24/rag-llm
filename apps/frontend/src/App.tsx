@@ -46,11 +46,11 @@ function App() {
           </div>
         </LampContainer>
       </div>
-      <div className="p-2 overflow-auto">
+      <div className="overflow-auto">
         <ScrollArea className="h-full">
           {error && <p>Error: {error.message}</p>}
           {response ? (
-            <Card className="response-card bg-gradient-to-br from-slate-300 to-slate-500 py-4">
+            <Card className="response-card bg-gradient-to-br from-slate-300 to-slate-500">
               <CardHeader>
                 <CardTitle>Response</CardTitle>
               </CardHeader>
@@ -58,9 +58,9 @@ function App() {
                 <div>
                   <Card className="main-news-card mb-4">
                     <CardHeader>
-                      <CardTitle>Main News</CardTitle>
+                      <CardTitle>Main Result</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="max-w-3xl">
                       <TextGenerateEffect
                         words={response.llmResults[0].message.content}
                         className="text-sm text-slate-700 text-left font-medium"
@@ -68,33 +68,35 @@ function App() {
                     </CardContent>
                   </Card>
                   <h2 className="text-xl font-semibold mb-2">
-                    Similarity News
+                    Similarity Results
                   </h2>
-                  {response.similaritySearchResults.map(
-                    (group: any, groupIndex: number) => (
-                      <div
-                        key={groupIndex}
-                        className="similarity-news-group mb-4"
-                      >
-                        {group.map((item: any, itemIndex: number) => (
-                          <Card
-                            key={itemIndex}
-                            className="similarity-news-card mb-2 py-4"
-                          >
-                            <CardContent>
-                              <TextGenerateEffect
-                                words={item.pageContent}
-                                className="text-sm text-slate-700 text-left font-medium"
-                              />
-                              <LinkPreview url={item.metadata.link}>
-                                Read more
-                              </LinkPreview>
-                            </CardContent>
-                          </Card>
-                        ))}
-                      </div>
-                    )
-                  )}
+                  {response &&
+                    response.similaritySearchResults &&
+                    response.similaritySearchResults.map(
+                      (group: any, groupIndex: number) => (
+                        <div
+                          key={groupIndex}
+                          className="similarity-news-group mb-4"
+                        >
+                          {group.map((item: any, itemIndex: number) => (
+                            <Card
+                              key={itemIndex}
+                              className="similarity-news-card mb-2 py-4"
+                            >
+                              <CardContent className="max-w-3xl">
+                                <TextGenerateEffect
+                                  words={item.pageContent}
+                                  className="text-sm text-slate-700 text-left font-medium"
+                                />
+                                <LinkPreview url={item.metadata.link}>
+                                  Read more
+                                </LinkPreview>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      )
+                    )}
                 </div>
               </CardContent>
             </Card>
