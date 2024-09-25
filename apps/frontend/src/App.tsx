@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { processRagLlm } from "@/apis/rag-llm";
 import SearchComponent from "@/components/search/search";
