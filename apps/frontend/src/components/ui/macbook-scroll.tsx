@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -23,7 +22,6 @@ import { IconWorld } from "@tabler/icons-react";
 import { IconCommand } from "@tabler/icons-react";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
-import Image from "next/image";
 
 export const MacbookScroll = ({
   src,
@@ -165,10 +163,9 @@ export const Lid = ({
         className="h-96 w-[32rem] absolute inset-0 bg-[#010101] rounded-2xl p-2"
       >
         <div className="absolute inset-0 bg-[#272729] rounded-lg" />
-        <Image
+        <img
           src={src as string}
           alt="aceternity logo"
-          fill
           className="object-cover object-left-top absolute rounded-lg inset-0 h-full w-full"
         />
       </motion.div>

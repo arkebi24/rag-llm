@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BrainCircuit } from "lucide-react";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 interface SearchComponentProps {
   onSearch: (query: string) => void;
@@ -23,14 +23,14 @@ export default function SearchComponent({ onSearch }: SearchComponentProps) {
           placeholder="Enter your search query"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-grow text-neutral-400 border border-gray-500 bg-transparent rounded-xl h-14 w-full "
+          className="flex-grow text-neutral-400 border border-gray-500 bg-transparent rounded-xl h-14 w-full"
         />
-        <Button
+        <HoverBorderGradient
           onClick={handleSearch}
-          className="w-full md:w-auto h-14 text-white border border-gray-500 bg-transparent rounded-xl"
+          className="w-full md:w-auto h-14 text-white bg-transparent rounded-xl"
         >
-          <BrainCircuit className="h-4 w-4" />
-        </Button>
+          <BrainCircuit className="h-4 w-4 mt-3" />
+        </HoverBorderGradient>
       </div>
     </div>
   );

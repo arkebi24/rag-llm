@@ -1,32 +1,42 @@
 import "./App.css";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { processRagLlm } from "@/apis/rag-llm";
 import SearchComponent from "@/components/search/search";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import LampDemo, { LampContainer } from "./components/ui/lamp";
+import LampDemo, { LampContainer } from "@/components/ui/lamp";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { TextGenerateEffect } from "./components/ui/text-generate-effect";
+import { LinkPreview } from "@/components/ui/link-preview";
+import { MultiStepLoaderDemo } from "@/components/loader/multistepLoader";
 
 function App() {
   const [queryKey, setQueryKey] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
-  const {
-    data: response,
-    error,
-    isLoading,
-  } = useQuery({
+  const { data: response, error } = useQuery({
     queryKey: ["ragLlm", queryKey],
-    queryFn: () => processRagLlm(queryKey),
+    queryFn: async () => {
+      const response = await processRagLlm(queryKey);
+      queryClient.invalidateQueries({ queryKey: ["ragLlm", queryKey] });
+      setIsLoading(false);
+      return response;
+    },
     enabled: !!queryKey,
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 
   const handleSearch = (query: string) => {
     setQueryKey(query);
+    queryClient.invalidateQueries({ queryKey: ["ragLlm", queryKey] });
+    setIsLoading(true);
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-screen overflow-hidden bg-transparent">
+    <div className="grid grid-cols-1 md:grid-cols-2 h-screen overflow-hidden bg-transparent p-2 space-x-3">
       <div className="relative">
         <LampContainer className="absolute inset-0">
           <LampDemo />
@@ -35,11 +45,10 @@ function App() {
           </div>
         </LampContainer>
       </div>
-      <div className="p-4 overflow-auto">
-        {isLoading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
-        {response && (
-          <ScrollArea className="h-full">
+      <div className="p-2 overflow-auto">
+        <ScrollArea className="h-full">
+          {error && <p>Error: {error.message}</p>}
+          {response && (
             <Card className="response-card bg-gradient-to-br from-slate-300 to-slate-500 py-4">
               <CardHeader>
                 <CardTitle>Response</CardTitle>
@@ -51,9 +60,10 @@ function App() {
                       <CardTitle>Main News</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-lg text-slate-700 text-left font-medium">
-                        {response.llmResults[0].message.content}
-                      </p>
+                      <TextGenerateEffect
+                        words={response.llmResults[0].message.content}
+                        className="text-sm text-slate-700 text-left font-medium"
+                      />
                     </CardContent>
                   </Card>
                   <h2 className="text-xl font-semibold mb-2">
@@ -71,17 +81,13 @@ function App() {
                             className="similarity-news-card mb-2 py-4"
                           >
                             <CardContent>
-                              <p className="text-sm text-slate-700 text-left font-medium">
-                                {item.pageContent}
-                              </p>
-                              <a
-                                href={item.metadata.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="news-link text-blue-500 hover:underline"
-                              >
+                              <TextGenerateEffect
+                                words={item.pageContent}
+                                className="text-sm text-slate-700 text-left font-medium"
+                              />
+                              <LinkPreview url={item.metadata.link}>
                                 Read more
-                              </a>
+                              </LinkPreview>
                             </CardContent>
                           </Card>
                         ))}
@@ -91,9 +97,10 @@ function App() {
                 </div>
               </CardContent>
             </Card>
-          </ScrollArea>
-        )}
+          )}
+        </ScrollArea>
       </div>
+      {isLoading && <MultiStepLoaderDemo loading={isLoading} />}
     </div>
   );
 }
