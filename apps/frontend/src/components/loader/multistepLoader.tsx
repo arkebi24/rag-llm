@@ -10,6 +10,15 @@ const loadingStates = [
   {
     text: "Generating response...",
   },
+  {
+    text: "Embedding response...",
+  },
+  {
+    text: "Getting Similarity Results...",
+  },
+  {
+    text: "Preparing response...",
+  },
 ];
 
 export function MultiStepLoaderDemo({ loading }: { loading: boolean }) {
