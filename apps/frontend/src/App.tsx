@@ -26,18 +26,20 @@ function App() {
   };
 
   return (
-    <div className="h-full flex flex-col md:flex-row">
-      <div className="md:w-1/2 p-4">
-        <LampContainer className="relative flex min-h-screen h-min flex-col items-center justify-center bg-slate-950 w-full rounded-md z-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 h-screen overflow-hidden bg-transparent">
+      <div className="relative">
+        <LampContainer className="absolute inset-0">
           <LampDemo />
-          <SearchComponent onSearch={handleSearch} />
+          <div className="absolute bottom-2 left-0 right-0">
+            <SearchComponent onSearch={handleSearch} />
+          </div>
         </LampContainer>
       </div>
-      <div className="md:w-1/2 p-4">
+      <div className="p-4 overflow-auto">
         {isLoading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
         {response && (
-          <ScrollArea className="h-[calc(100vh-2rem)]">
+          <ScrollArea className="h-full">
             <Card className="response-card bg-gradient-to-br from-slate-300 to-slate-500 py-4">
               <CardHeader>
                 <CardTitle>Response</CardTitle>
