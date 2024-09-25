@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { TextGenerateEffect } from "./components/ui/text-generate-effect";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { MultiStepLoaderDemo } from "@/components/loader/multistepLoader";
+import AISearchExplainer from "@/components/Instruction/AISearchExplainer";
 
 function App() {
   const [queryKey, setQueryKey] = useState("");
@@ -48,7 +49,7 @@ function App() {
       <div className="p-2 overflow-auto">
         <ScrollArea className="h-full">
           {error && <p>Error: {error.message}</p>}
-          {response && (
+          {response ? (
             <Card className="response-card bg-gradient-to-br from-slate-300 to-slate-500 py-4">
               <CardHeader>
                 <CardTitle>Response</CardTitle>
@@ -97,6 +98,8 @@ function App() {
                 </div>
               </CardContent>
             </Card>
+          ) : (
+            <AISearchExplainer />
           )}
         </ScrollArea>
       </div>
