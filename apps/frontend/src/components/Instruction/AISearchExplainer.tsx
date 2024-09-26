@@ -27,7 +27,7 @@ const steps = [
 const AISearchExplainer: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full p-8">
-      <h2 className="text-3xl font-bold mb-8 text-center">
+      <h2 className="text-3xl font-bold mb-8 text-white text-center">
         How AI Search Works
       </h2>
       <div className="space-y-8">
@@ -38,7 +38,7 @@ const AISearchExplainer: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.2 }}
           >
-            <Card className="bg-white dark:bg-gray-800">
+            <Card className="bg-slate-200 dark:bg-gray-800">
               <CardContent className="flex items-center p-6">
                 <div className="mr-4">
                   <step.icon className="w-8 h-8 text-blue-500" />
