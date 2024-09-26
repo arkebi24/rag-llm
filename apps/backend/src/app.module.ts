@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RagLlmModule } from './rag-llm/rag-llm.module';
 
 @Module({
-  imports: [RagLlmModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    RagLlmModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

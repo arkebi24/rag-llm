@@ -16,6 +16,7 @@
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "cheerio": "^1.0.0-rc.12",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "langchain": "^0.0.200",
     "openai": "^4.0.0",
